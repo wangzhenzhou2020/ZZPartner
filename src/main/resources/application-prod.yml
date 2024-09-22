@@ -1,0 +1,38 @@
+# 线上配置文件
+# 
+# 
+# 注意开源时这个文件不要提交、或者不要填真实配置
+spring:
+  # DataSource Config
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://192.168.2.2:3306/mybatis
+    # url: jdbc:mysql://localhost:3306/yupao  # 宝塔的mysql和应用在一起
+    url: jdbc:mysql://42.194.158.197:3306/yupao  # 宝塔的mysql和应用在一起
+    #    username: root
+#    username: root      #
+    username: zhenzhou      # 宝塔
+#    password: 123
+    password: 12345678  # 宝塔
+  # session 失效时间
+  session:
+    timeout: 86400
+  redis:
+#    host: 192.168.2.2  # ip全部替换为实际网络
+    port: 6379
+    #      host: localhost  #  宝塔和应用在一起
+    host: 42.194.158.197  #  宝塔和应用在一起
+    database: 1
+    password: 12345678
+
+server:
+  address: 0.0.0.0
+#  servlet:
+#    session:
+#      cookie:
+#        domain: 192.168.2.2
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+
+# [编程知识星球](https://yupi.icu) 零基础快速入门编程，不走弯路！30+ 原创学习路线和专栏、1000+ 编程精华文章、500+ 编程学习指南、20T+ 编程资源汇总

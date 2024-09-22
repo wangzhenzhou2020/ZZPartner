@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<!--    <property name="LOG_PATH" value="logs"/>-->
+    <property name="LOG_PATH" value="/home/admin/yupao-backend-dupli/logs"/>
+    <property name="appName" value="yubi-backend-dupli"/>
+    <property name="PID" value="${PID:-Unknown}"/>
+    <!--    <property name="LOG_PATTERN"-->
+    <!--              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %green(${PID}) %magenta([%thread]) %cyan(%logger{36}) %yellow(line-%line) %green(traceId_%X{traceId}) %msg%n"/>-->
+
+    <!--    无颜色，方便baota面板 docker日志查看-->
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5level | ${PID} | [%thread] ｜ %logger{36} ｜ line-%line ｜ traceId_%X{traceId} ｜ %msg%n"/>
+
+    <!-- Console Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+<!--    &lt;!&ndash; File Appender &ndash;&gt;-->
+<!--    <appender name="FILE" class="ch.qos.logback.core.FileAppender">-->
+<!--        <file>logs/app.log</file>-->
+<!--        <append>true</append>-->
+<!--        <encoder>-->
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+    <!-- Rolling File Appender -->
+    <appender name="rollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/app.log</file>   <!--追加到哪个文件 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy"> <!--文件拆分原则 -->
+            <fileNamePattern>${LOG_PATH}/app.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>1</maxHistory>  <!--时间天数-->
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logger for specific package  additivity="false" 其父级就不重复输出了-->
+    <logger name="com.example" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <!-- Root Logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+<!--        <appender-ref ref="FILE" />-->
+        <appender-ref ref="rollingFileAppender" />
+    </root>
+</configuration>

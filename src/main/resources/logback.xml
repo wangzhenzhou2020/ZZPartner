@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-<!--    <property name="LOG_PATH" value="logs"/>-->
-    <property name="LOG_PATH" value="/home/admin/yupao-backend-dupli/logs"/>
+    <property name="LOG_PATH" value="logs"/>
+<!--    <property name="LOG_PATH" value="/home/admin/yupao-backend-dupli/logs"/>-->
     <property name="appName" value="yubi-backend-dupli"/>
     <property name="PID" value="${PID:-Unknown}"/>
     <!--    <property name="LOG_PATTERN"-->
